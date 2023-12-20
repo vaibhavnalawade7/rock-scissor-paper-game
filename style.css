@@ -1,0 +1,227 @@
+body {
+    background-color: #8CC461;
+}
+
+img {
+    width: 120px;
+    height: 108.507px;
+    flex-shrink: 0;
+}
+
+.container {
+    position: relative;
+    margin-top: 100px;
+}
+
+.btn {
+    background-color: white;
+    border-radius: 10px;
+    border: 5px solid white;
+    height: 45px;
+    width: 150px;
+   
+}
+.resultMessage {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#u_rock {
+    top: 350px;
+    left: 650px;
+    
+}
+
+#u_scissor {
+    top: 350px;
+    left: 850px;
+}
+
+#u_paper {
+    top: 500px;
+    left: 750px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="164px" height="164px" viewBox="0 0 164 164" fill="none"><g filter="url(%23filter0_i_1486_9)"><circle cx="115" cy="81" r="115" fill="white"/></g><g filter="url(%23filter1_d_1486_9)"><circle cx="83" cy="81" r="113" stroke="%23FFA943" stroke-width="16" shape-rendering="crispEdges"/></g><defs><filter id="filter0_i_1486_9" x="28" y="26" width="113" height="110" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/><feMorphology radius="1" operator="erode" in="SourceAlpha" result="effect1_innerShadow_1486_9"/><feOffset dx="3"/><feGaussianBlur stdDeviation="10.5"/><feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/><feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"/><feBlend mode="normal" in2="shape" result="effect1_innerShadow_1486_9"/></filter><filter id="filter1_d_1486_9" x="0" y="0" width="164" height="164" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/><feOffset dx="-1" dy="1"/><feGaussianBlur stdDeviation="5.5"/><feComposite in2="hardAlpha" operator="out"/><feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.35 0"/><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1486_9"/><feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1486_9" result="shape"/></filter></defs></svg>');
+    background-size: cover;
+    background-position: center;
+}
+
+.game-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid #000;
+    background-color: white;
+    position: absolute;
+}
+
+.r-btn {
+    border: 5px solid #0074B6;
+}
+.s-btn {
+    border: 5px solid #BD00FF;
+}
+.p-btn {
+    border: 5px solid #FFD600;
+}
+.game-title {
+    text-align: center;
+}
+
+.border-rectangle {
+    border: 2px solid rgb(255, 255, 255);
+    width: 500px;
+    padding: 20px;
+    position: top;
+}
+
+.scoreboard {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.score {
+    text-align: center;
+    width: 150px;
+    height: 150px;
+    background-color: white;
+    border: 1px solid black;
+    margin: 0 auto;
+    line-height: 50px;
+}
+
+.score p {
+    margin: 5px 0;
+}
+
+.score-value {
+    font-size: 80px;
+}
+
+button.selected {
+    border: 2px solid yellow;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.game-title {
+    /* This was left intentionally blank. */
+}
+
+.scoreboard {
+    display: flex;
+    flex-direction: row;
+}
+
+.score {
+    margin-right: 20px;
+}
+
+.gap {
+    width: 130px;
+}
+.sound-control {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.sound-control button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    outline: none;
+    font-size: medium;
+    font-weight: bold;
+    width: 150px;
+}
+
+.sound-control button:hover {
+    background-color: #2980b9;
+}
+
+
+/* Position the Rules Button */
+.rules-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px;
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 150px;
+    font-size: medium;
+}
+
+/* Popup Styling */
+.close {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.rules-popup {
+    display: none;
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 300px;
+    background-color: #004429;
+    border: 7px solid #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    padding: 20px;
+    color: white;
+    z-index: 1;
+}
+
+
+.rules-content {
+    position: relative;
+    text-align: justify;
+    padding: 10px;
+    margin: 10px;
+}
+
+.yellow-bullet-points {
+    list-style: none;
+    padding-left: 20px;
+}
+.yellow-bullet-points li {
+    text-align: justify;
+    margin-bottom: 10px;
+}
+
+.yellow-bullet-points li:before {
+    content: '\25AA';
+    color: yellow; 
+    margin-right: 10px;
+}

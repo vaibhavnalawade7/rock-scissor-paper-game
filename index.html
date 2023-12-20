@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RPS Game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <center>
+      <div class="sound-control">
+        <button onclick="toggleSound()" id="soundButton">SOUND: ON</button>
+      </div>
+      <div class="container">
+        <div class="border-rectangle">
+          <div class="game-container">
+            <div class="game-title">
+              <h2 style="color: white">ROCK<br />PAPER<br />SCISSORS</h2>
+            </div>
+            <div class="gap"></div>
+            <div class="scoreboard">
+              <div class="score">
+                <p>Computer Score</p>
+                <div class="score-value" id="computerScore"><b>0</b></div>
+              </div>
+              <div class="score">
+                <p>User Score</p>
+                <div class="score-value" id="userScore"><b>0</b></div>
+              </div>
+              <div class="game-options">
+                <button
+                  class="game-button"
+                  id="u_rock"
+                  onclick="chooseOption(1)"
+                >
+                  <img src="assets/rock.png" alt="Rock" />
+                </button>
+                <button
+                  class="game-button"
+                  id="u_scissor"
+                  onclick="chooseOption(2)"
+                >
+                  <img src="assets/scissor.png" alt="Scissor" />
+                </button>
+                <button
+                  class="game-button"
+                  id="u_paper"
+                  onclick="chooseOption(3)"
+                >
+                  <img src="assets/paper.png" alt="Paper" />
+                </button>
+              </div>
+              <div class="resultMessage" id="resultMessage"></div>
+              <button
+                class="btn"
+                id="playAgainBtn"
+                style="display: none"
+                onclick="resetGame()"
+              >
+                Play Again
+              </button>
+            </div>
+          </div>
+        </div>
+        <button class="rules-btn" onclick="showRules()"><b>RULES</b></button>
+
+        <!-- Popup for Rules -->
+        <div class="rules-popup" id="rulesPopup">
+          <div class="rules-content">
+            <span class="close" onclick="closeRules()">&times;</span>
+            <h3 style="text-align: center">Game Rules</h3>
+            <!-- Add your game rules here -->
+            <ul class="yellow-bullet-points">
+              <li>
+                Rock beats scissors, scissors beat paper, and paper beats rock.
+              </li>
+              <li>
+                Agree ahead of time whether you’ll count off “rock, paper,
+                scissors, shoot” or just “rock, paper, scissors.”
+              </li>
+              <li>
+                Use rock, paper, scissors to settle minor decisions or simply
+                play to pass the time.
+              </li>
+              <li>
+                If both players lay down the same hand, each player lays down
+                another hand.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </center>
+
+    <script>
+        
+      var gameMusic = new Audio("music/bgm.mp3");
+      var rockSound = new Audio("music/rock.mp3");
+      var scissorSound = new Audio("music/scissor.mp3");
+      var paperSound = new Audio("music/paper.mp3");
+      gameMusic.volume = 0.7;
+
+      var computerScoreDisplay = document
+        .getElementById("computerScore")
+        .getElementsByTagName("b")[0];
+      var userScoreDisplay = document
+        .getElementById("userScore")
+        .getElementsByTagName("b")[0];
+
+      var computerScore = parseInt(localStorage.getItem("computerScore")) || 0;
+      var userScore = parseInt(localStorage.getItem("userScore")) || 0;
+
+      computerScoreDisplay.innerText = computerScore;
+      userScoreDisplay.innerText = userScore;
+
+      var isMusicPlaying = localStorage.getItem("isMusicPlaying") === "true";
+
+
+      function toggleSound() {
+        var soundButton = document.getElementById("soundButton");
+
+        if (!gameMusic.paused) {
+          gameMusic.pause();
+          soundButton.innerText = "SOUND: OFF";
+          localStorage.setItem("isMusicPlaying", false);
+        } else {
+          gameMusic.play();
+          soundButton.innerText = "SOUND: ON";
+          localStorage.setItem("isMusicPlaying", true);
+        }
+      }
+
+      function playGameMusic() {
+        gameMusic.loop = true;
+        if (isMusicPlaying) {
+          gameMusic.play();
+        }
+      }
+
+      playGameMusic();
+
+      function chooseOption(userChoice) {
+        var computerChoice = Math.floor(Math.random() * 3) + 1;
+
+        var resultMessage = document.getElementById("resultMessage");
+        var playAgainBtn = document.getElementById("playAgainBtn");
+
+        if (userChoice === computerChoice) {
+          resultMessage.innerText = "It's a tie!";
+          playAgainBtn.innerText = "REPLAY";
+        } else if (
+          (userChoice === 1 && computerChoice === 2) ||
+          (userChoice === 2 && computerChoice === 3) ||
+          (userChoice === 3 && computerChoice === 1)
+        ) {
+          resultMessage.innerText = "YOU WIN AGAINST PC!";
+          playAgainBtn.innerText = "PLAY AGAIN";
+          userScore++;
+          if (userChoice === 1) {
+            rockSound.play();
+          } else if (userChoice === 2) {
+            scissorSound.play();
+          } else {
+            paperSound.play();
+          }
+        } else {
+          resultMessage.innerText = "YOU LOST AGAINST PC!";
+          playAgainBtn.innerText = "PLAY AGAIN";
+          computerScore++;
+          if (userChoice === 1) {
+            rockSound.play();
+          } else if (userChoice === 2) {
+            scissorSound.play();
+          } else {
+            paperSound.play();
+          }
+        }
+
+        computerScoreDisplay.innerText = computerScore;
+        userScoreDisplay.innerText = userScore;
+
+        localStorage.setItem("computerScore", computerScore.toString());
+        localStorage.setItem("userScore", userScore.toString());
+
+        playAgainBtn.style.display = "block";
+      }
+
+      function resetGame() {
+        var resultMessage = document.getElementById("resultMessage");
+        var playAgainBtn = document.getElementById("playAgainBtn");
+
+        resultMessage.innerText = "";
+        playAgainBtn.style.display = "none";
+      }
+
+      window.onload = function () {
+        playGameMusic();
+      };
+
+      window.onbeforeunload = function () {
+        localStorage.setItem("isMusicPlaying", !gameMusic.paused);
+      };
+
+      function showRules() {
+        var rulesPopup = document.getElementById("rulesPopup");
+        rulesPopup.style.display = "block";
+      }
+
+      function closeRules() {
+        var rulesPopup = document.getElementById("rulesPopup");
+        rulesPopup.style.display = "none";
+      }
+    </script>
+  </body>
+</html>
