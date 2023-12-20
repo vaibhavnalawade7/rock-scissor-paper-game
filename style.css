@@ -19,6 +19,8 @@ img {
     border: 5px solid white;
     height: 45px;
     width: 150px;
+    font-weight: bold;
+    color: black;
    
 }
 .resultMessage {
@@ -46,6 +48,18 @@ img {
     background-position: center;
 }
 
+#pcText {
+    top: 300px;
+    left: 650px;
+    color: #ffffff;
+}
+
+#userText {
+    top: 300px;
+    left: 850px;    
+    color: #ffffff;
+
+}
 .game-button {
     position: absolute;
     top: 50%;
@@ -60,13 +74,13 @@ img {
 }
 
 .r-btn {
-    border: 5px solid #0074B6;
+    border: 12px solid #0074B6;
 }
 .s-btn {
-    border: 5px solid #BD00FF;
+    border: 12px solid #BD00FF;
 }
 .p-btn {
-    border: 5px solid #FFD600;
+    border: 12px solid #FFD600;
 }
 .game-title {
     text-align: center;
@@ -74,9 +88,10 @@ img {
 
 .border-rectangle {
     border: 2px solid rgb(255, 255, 255);
-    width: 500px;
+    width: 600px;
     padding: 20px;
     position: top;
+    border-radius: 10px;
 }
 
 .scoreboard {
@@ -90,9 +105,10 @@ img {
     width: 150px;
     height: 150px;
     background-color: white;
-    border: 1px solid black;
+    border: 5px solid white;
     margin: 0 auto;
     line-height: 50px;
+    border-radius: 10px;
 }
 
 .score p {
@@ -115,7 +131,7 @@ button.selected {
 }
 
 .game-title {
-    /* This was left intentionally blank. */
+    
 }
 
 .scoreboard {
@@ -156,11 +172,27 @@ button.selected {
 }
 
 
-/* Position the Rules Button */
-.rules-btn {
+.button-container {
     position: fixed;
     bottom: 20px;
     right: 20px;
+    display: flex;
+    flex-direction: row-reverse; 
+    gap: 10px; 
+}
+
+.next-btn {
+    padding: 10px;
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 150px;   
+    font-size: medium;
+}
+
+.rules-btn {
     padding: 10px;
     background-color: transparent;
     border: 2px solid #ffffff;
@@ -171,14 +203,16 @@ button.selected {
     font-size: medium;
 }
 
-/* Popup Styling */
+
+
 .close {
     position: absolute;
-    top: -20px;
-    right: -20px;
+    top: -70px;
+    right: -55px;
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    border: 5px solid #ffffff;
     background-color: red;
     color: white;
     display: flex;
@@ -186,6 +220,7 @@ button.selected {
     align-items: center;
     cursor: pointer;
     z-index: 1;
+    font-weight: bold;
 }
 
 .rules-popup {
@@ -224,4 +259,28 @@ button.selected {
     content: '\25AA';
     color: yellow; 
     margin-right: 10px;
+}
+a {
+    text-decoration: none;
+}
+
+.trophy-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+.star {
+    position: absolute;
+    width: 30px; 
+    height: auto;
+}
+
+.star:nth-child(1) {
+    top: 20%;
+    left: 30%;
+}
+
+.star:nth-child(2) {
+    top: 40%;
+    left: 60%;
 }

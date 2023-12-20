@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RPS Game</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
   </head>
 
   <body>
@@ -30,21 +31,21 @@
               </div>
               <div class="game-options">
                 <button
-                  class="game-button"
+                  class="game-button r-btn"
                   id="u_rock"
                   onclick="chooseOption(1)"
                 >
                   <img src="assets/rock.png" alt="Rock" />
                 </button>
                 <button
-                  class="game-button"
+                  class="game-button s-btn"
                   id="u_scissor"
                   onclick="chooseOption(2)"
                 >
                   <img src="assets/scissor.png" alt="Scissor" />
                 </button>
                 <button
-                  class="game-button"
+                  class="game-button p-btn"
                   id="u_paper"
                   onclick="chooseOption(3)"
                 >
@@ -63,14 +64,12 @@
             </div>
           </div>
         </div>
-        <button class="rules-btn" onclick="showRules()"><b>RULES</b></button>
 
-        <!-- Popup for Rules -->
         <div class="rules-popup" id="rulesPopup">
           <div class="rules-content">
             <span class="close" onclick="closeRules()">&times;</span>
             <h3 style="text-align: center">Game Rules</h3>
-            <!-- Add your game rules here -->
+
             <ul class="yellow-bullet-points">
               <li>
                 Rock beats scissors, scissors beat paper, and paper beats rock.
@@ -91,15 +90,25 @@
           </div>
         </div>
       </div>
+
+      <label class="userText" id="userText"></label>
+      <label class="pcText" id="pcText"></label>
     </center>
 
+    <div class="button-container">
+      <a href="hurray.html"
+        ><button class="next-btn"><b>NEXT</b></button></a
+      >
+      <button class="rules-btn" onclick="showRules()"><b>RULES</b></button>
+    </div>
+
     <script>
-        
       var gameMusic = new Audio("music/bgm.mp3");
       var rockSound = new Audio("music/rock.mp3");
       var scissorSound = new Audio("music/scissor.mp3");
       var paperSound = new Audio("music/paper.mp3");
       gameMusic.volume = 0.7;
+
 
       var computerScoreDisplay = document
         .getElementById("computerScore")
@@ -115,6 +124,9 @@
       userScoreDisplay.innerText = userScore;
 
       var isMusicPlaying = localStorage.getItem("isMusicPlaying") === "true";
+
+
+      
 
 
       function toggleSound() {
@@ -147,7 +159,8 @@
         var playAgainBtn = document.getElementById("playAgainBtn");
 
         if (userChoice === computerChoice) {
-          resultMessage.innerText = "It's a tie!";
+          resultMessage.innerText = "TIE UP!";
+          document.querySelector(".next-btn").style.display = "none";
           playAgainBtn.innerText = "REPLAY";
         } else if (
           (userChoice === 1 && computerChoice === 2) ||
@@ -155,28 +168,58 @@
           (userChoice === 3 && computerChoice === 1)
         ) {
           resultMessage.innerText = "YOU WIN AGAINST PC!";
+          document.querySelector(".next-btn").style.display = "block";
           playAgainBtn.innerText = "PLAY AGAIN";
           userScore++;
+
           if (userChoice === 1) {
             rockSound.play();
+            userText.innerText = "You Picked Rock";
           } else if (userChoice === 2) {
             scissorSound.play();
+            userText.innerText = "You Picked Scissor";
           } else {
             paperSound.play();
+            userText.innerText = "You Picked Paper";
           }
         } else {
           resultMessage.innerText = "YOU LOST AGAINST PC!";
+          document.querySelector(".next-btn").style.display = "none";
           playAgainBtn.innerText = "PLAY AGAIN";
           computerScore++;
           if (userChoice === 1) {
             rockSound.play();
+            userText.innerText = "You Picked Rock";
           } else if (userChoice === 2) {
             scissorSound.play();
+            userText.innerText = "You Picked Scissor";
           } else {
             paperSound.play();
+            userText.innerText = "You Picked Paper";
           }
         }
 
+        if (userChoice === 1 && computerChoice === 2) {
+            document.querySelector(".p-btn").style.display = "none";
+        }
+        else if (userChoice === 2 && computerChoice === 3) {
+            document.querySelector(".r-btn").style.display = "none";
+        }
+        else if (userChoice === 3 && computerChoice === 1) {
+            document.querySelector(".s-btn").style.display = "none";
+        }
+        
+
+        if (computerChoice === 1) {
+          rockSound.play();
+          pcText.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;PC Picked Rock";
+        } else if (computerChoice === 2) {
+          scissorSound.play();
+          pcText.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;PC Picked Scissor";
+        } else {
+          paperSound.play();
+          pcText.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;PC Picked Paper";
+        }
         computerScoreDisplay.innerText = computerScore;
         userScoreDisplay.innerText = userScore;
 
@@ -192,10 +235,16 @@
 
         resultMessage.innerText = "";
         playAgainBtn.style.display = "none";
+
+        document.querySelector(".r-btn").style.display = "block";
+        document.querySelector(".s-btn").style.display = "block";
+        document.querySelector(".p-btn").style.display = "block";
+
       }
 
       window.onload = function () {
         playGameMusic();
+        document.querySelector(".next-btn").style.display = "none";
       };
 
       window.onbeforeunload = function () {
@@ -211,6 +260,8 @@
         var rulesPopup = document.getElementById("rulesPopup");
         rulesPopup.style.display = "none";
       }
+
+      
     </script>
   </body>
 </html>
