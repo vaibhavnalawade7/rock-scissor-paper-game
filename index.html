@@ -11,8 +11,8 @@
   <body>
     <center>
       <div class="sound-control">
-        <button onclick="toggleSound()" id="soundButton">SOUND: OFF</button>
-        <button onclick="toggleSound()" id="effectButton">EFFECT: ON</button>
+        <button onclick="toggleSound()" id="soundButton">SOUND: ON</button>
+        <button onclick="" id="effectButton">EFFECT: ON</button>
       </div>
       <div class="container">
         <div class="border-rectangle">
@@ -53,15 +53,6 @@
                   <img src="assets/paper.png" alt="Paper" />
                 </button>
               </div>
-              <div class="resultMessage" id="resultMessage"></div>
-              <button
-                class="btn"
-                id="playAgainBtn"
-                style="display: none"
-                onclick="resetGame()"
-              >
-                Play Again
-              </button>
             </div>
           </div>
         </div>
@@ -96,10 +87,14 @@
       <label class="pcText" id="pcText"></label>
     </center>
 
+    <div class="play-container">
+      <div class="resultMessage" id="resultMessage"></div>
+      <button class="btn" id="playAgainBtn" style="display: none" onclick="resetGame()">Play Again</button>
+    </div>
+
+
     <div class="button-container">
-      <a href="hurray.html"
-        ><button class="next-btn"><b>NEXT</b></button></a
-      >
+      <a href="hurray.html"><button class="next-btn"><b>NEXT</b></button></a>
       <button class="rules-btn" onclick="showRules()"><b>RULES</b></button>
     </div>
 
@@ -109,7 +104,6 @@
       var scissorSound = new Audio("music/scissor.mp3");
       var paperSound = new Audio("music/paper.mp3");
       gameMusic.volume = 0.7;
-
 
       var computerScoreDisplay = document
         .getElementById("computerScore")
@@ -125,10 +119,6 @@
       userScoreDisplay.innerText = userScore;
 
       var isMusicPlaying = localStorage.getItem("isMusicPlaying") === "true";
-
-
-      
-
 
       function toggleSound() {
         var soundButton = document.getElementById("soundButton");
@@ -201,15 +191,12 @@
         }
 
         if (userChoice === 1 && computerChoice === 2) {
-            document.querySelector(".p-btn").style.display = "none";
+          document.querySelector(".p-btn").style.display = "none";
+        } else if (userChoice === 2 && computerChoice === 3) {
+          document.querySelector(".r-btn").style.display = "none";
+        } else if (userChoice === 3 && computerChoice === 1) {
+          document.querySelector(".s-btn").style.display = "none";
         }
-        else if (userChoice === 2 && computerChoice === 3) {
-            document.querySelector(".r-btn").style.display = "none";
-        }
-        else if (userChoice === 3 && computerChoice === 1) {
-            document.querySelector(".s-btn").style.display = "none";
-        }
-        
 
         if (computerChoice === 1) {
           rockSound.play();
@@ -240,7 +227,6 @@
         document.querySelector(".r-btn").style.display = "block";
         document.querySelector(".s-btn").style.display = "block";
         document.querySelector(".p-btn").style.display = "block";
-
       }
 
       window.onload = function () {
@@ -261,8 +247,6 @@
         var rulesPopup = document.getElementById("rulesPopup");
         rulesPopup.style.display = "none";
       }
-
-      
     </script>
   </body>
 </html>
